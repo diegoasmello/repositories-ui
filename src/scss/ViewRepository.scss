@@ -1,0 +1,56 @@
+.view-repository {
+  padding-top: 56px;
+  padding-bottom: 40px;
+
+  .content {
+    display: flex;
+    flex-direction: column;
+    height: calc(100vh - 96px);
+    max-height: calc(100vh - 96px);
+
+    .card-about {
+      margin-bottom: 16px;
+
+      .card-body {
+        h1 {
+          font-size: 18px;
+          font-weight: 400;
+          letter-spacing: 0.01em;
+
+          margin-bottom: 12px;
+
+          span {
+            font-weight: 600;
+          }
+        }
+
+        .description {
+          font-size: 16px;
+          line-height: 22px;
+        }
+
+        .btn {
+        }
+      }
+    }
+
+    .card-from-author {
+      flex: 1;
+
+      .card-header {
+        display: flex;
+        align-items: center;
+
+        height: 36px;
+
+        font-size: 14px;
+        font-weight: 600;
+
+        padding: 0 24px;
+      }
+
+      .card-body {
+      }
+    }
+  }
+}
