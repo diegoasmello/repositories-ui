@@ -10,7 +10,7 @@ function App() {
     <BrowserRouter>
       <Switch>
         <Route path="/" exact component={Home} />
-        <Route path="/view/:id" exact component={ViewRepository} />
+        <Route path="/view/:owner/:repo" exact component={ViewRepository} />
       </Switch>
     </BrowserRouter>
   );

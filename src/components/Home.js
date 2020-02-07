@@ -1,58 +1,124 @@
-import React from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import { Link } from "react-router-dom";
 import "../scss/Home.scss";
 
+const API_URL = "https://api.github.com/users/diegoasmello/repos";
+
 export default function Home() {
+  const [repositories, setRepositores] = useState([]);
+
+  const fetchData = useCallback(async () => {
+    const response = await fetch(API_URL);
+    const data = await response.json();
+    console.log(data);
+    setRepositores(data);
+  }, []);
+
+  useEffect(() => {
+    fetchData();
+  }, [fetchData]);
+
   return (
     <div className="home">
       <div className="container">
         <div className="row">
           <div className="col-lg-8 offset-lg-2 col-md-12 offset-md-0">
             <main className="content">
-              <input type="text" placeholder="Search to..."></input>
+              <div className="input-container">
+                <input type="text" placeholder="Search to..."></input>
+
+                <button className="btn">
+                  <svg
+                    width="20"
+                    height="20"
+                    viewBox="0 0 20 20"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      className="fill"
+                      fillRule="evenodd"
+                      d="M12.442 12.442a1 1 0 011.415 0l3.85 3.85a1 1 0 01-1.414 1.415l-3.85-3.85a1 1 0 010-1.415z"
+                      clipRule="evenodd"
+                    />
+                    <path
+                      className="fill"
+                      fillRule="evenodd"
+                      d="M8.5 14a5.5 5.5 0 100-11 5.5 5.5 0 000 11zM15 8.5a6.5 6.5 0 11-13 0 6.5 6.5 0 0113 0z"
+                      clipRule="evenodd"
+                    />
+                  </svg>
+                </button>
+              </div>
 
               <div className="card">
                 <div className="card-body">
                   <h2>600,228 repository results</h2>
 
                   <ul className="repositories">
-                    <li className="repository-item">
-                      <Link to={"/view/1"} className="repository-link">
-                        <svg
-                          width="12"
-                          height="16"
-                          viewBox="0 0 12 16"
-                          version="1.1"
-                          xmlns="http://www.w3.org/2000/svg"
+                    {repositories.map((repo) => (
+                      <li key={repo.id} className="repository-item">
+                        <Link
+                          to={"/view/" + repo.owner.login + "/" + repo.name}
+                          className="repository-link"
                         >
-                          <path
-                            class="fill"
-                            fill-rule="evenodd"
-                            d="M4 9H3V8h1v1zm0-3H3v1h1V6zm0-2H3v1h1V4zm0-2H3v1h1V2zm8-1v12c0 .55-.45 1-1 1H6v2l-1.5-1.5L3 16v-2H1c-.55 0-1-.45-1-1V1c0-.55.45-1 1-1h10c.55 0 1 .45 1 1zm-1 10H1v2h2v-1h3v1h5v-2zm0-10H2v9h9V1z"
-                          ></path>
-                        </svg>
+                          <svg
+                            width="12"
+                            height="16"
+                            viewBox="0 0 12 16"
+                            version="1.1"
+                            xmlns="http://www.w3.org/2000/svg"
+                          >
+                            <path
+                              className="fill"
+                              fillRule="evenodd"
+                              d="M4 9H3V8h1v1zm0-3H3v1h1V6zm0-2H3v1h1V4zm0-2H3v1h1V2zm8-1v12c0 .55-.45 1-1 1H6v2l-1.5-1.5L3 16v-2H1c-.55 0-1-.45-1-1V1c0-.55.45-1 1-1h10c.55 0 1 .45 1 1zm-1 10H1v2h2v-1h3v1h5v-2zm0-10H2v9h9V1z"
+                            ></path>
+                          </svg>
 
-                        <div class="repository-content">
-                          <h3 className="repository-title">
-                            angular/<span>angular-cli</span>
-                          </h3>
+                          <div className="repository-content">
+                            <h3 className="repository-title">
+                              {repo.owner.login}/<span>{repo.name}</span>
+                            </h3>
 
-                          <p className="repository-description">
-                            One framework. Mobile & desktop.
-                          </p>
+                            {repo.description && (
+                              <p className="repository-description">
+                                {repo.description}
+                              </p>
+                            )}
 
-                          <ul className="repository-info">
-                            <li>57,3 k</li>
+                            <ul className="repository-info">
+                              <li className="stargazers">
+                                <svg
+                                  width="14"
+                                  height="16"
+                                  viewBox="0 0 14 16"
+                                  version="1.1"
+                                  xmlns="http://www.w3.org/2000/svg"
+                                >
+                                  <path
+                                    className="fill"
+                                    fillRule="evenodd"
+                                    d="M14 6l-4.9-.64L7 1 4.9 5.36 0 6l3.6 3.26L2.67 14 7 11.67 11.33 14l-.93-4.74L14 6z"
+                                  ></path>
+                                </svg>
 
-                            <li>57,3 k</li>
+                                {repo.stargazers_count}
+                              </li>
 
-                            <li>57,3 k</li>
+                              <li class="language">
+                                <div class="language-color"></div>
 
-                            <li>57,3 k</li>
-                          </ul>
-                        </div>
-                      </Link>
-                    </li>
+                                {repo.language}
+                              </li>
+
+                              <li class="updated">
+                                Updated at {repo.updated_at}
+                              </li>
+                            </ul>
+                          </div>
+                        </Link>
+                      </li>
+                    ))}
                   </ul>
                 </div>
               </div>

@@ -1,7 +1,24 @@
-import React from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import "../scss/ViewRepository.scss";
 
-export default function ViewRepository() {
+const API_URL = "https://api.github.com/repos";
+
+export default function ViewRepository({ match }) {
+  const [repository, setRepository] = useState([]);
+
+  const fetchData = useCallback(async () => {
+    const response = await fetch(
+      API_URL + "/" + match.params.owner + "/" + match.params.repo
+    );
+    const data = await response.json();
+    console.log(data);
+    setRepository(data);
+  }, [match.params.owner, match.params.repo]);
+
+  useEffect(() => {
+    fetchData();
+  }, [fetchData]);
+
   return (
     <div className="view-repository">
       <div className="container">
@@ -11,14 +28,14 @@ export default function ViewRepository() {
               <div className="card card-about">
                 <div className="card-body">
                   <h1>
-                    angular / <span>angular-cli</span>
+                    {match.params.owner} / <span>{repository.name}</span>
                   </h1>
 
-                  <p className="description">
-                    One framework. Mobile & desktop.
-                  </p>
+                  {repository.description && (
+                    <p className="description">{repository.description}</p>
+                  )}
 
-                  <a href="" className="btn">
+                  <a href={repository.html_url} className="btn">
                     View on Github
                   </a>
                 </div>
