@@ -105,13 +105,13 @@ export default function Home() {
                                 {repo.stargazers_count}
                               </li>
 
-                              <li class="language">
-                                <div class="language-color"></div>
+                              <li className="language">
+                                <div className="language-color"></div>
 
                                 {repo.language}
                               </li>
 
-                              <li class="updated">
+                              <li className="updated">
                                 Updated at {repo.updated_at}
                               </li>
                             </ul>

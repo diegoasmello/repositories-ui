@@ -1,9 +1,9 @@
 import React, { useState, useEffect, useCallback } from "react";
-import "../scss/ViewRepository.scss";
+import "../scss/RepositoryDetail.scss";
 
 const API_URL = "https://api.github.com/repos";
 
-export default function ViewRepository({ match }) {
+export default function RepositoryDetail({ match }) {
   const [repository, setRepository] = useState([]);
 
   const fetchData = useCallback(async () => {
@@ -20,7 +20,7 @@ export default function ViewRepository({ match }) {
   }, [fetchData]);
 
   return (
-    <div className="view-repository">
+    <div className="repository-detail">
       <div className="container">
         <div className="row">
           <div className="col-lg-8 offset-lg-2 col-md-12 offset-md-0">
