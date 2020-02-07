@@ -29,7 +29,11 @@ export default function Home() {
     if (value) {
       fetchData(value);
     } else {
-      alert("Você deve digitar algo!");
+      if (repositories.total_count > 0) {
+        setRepositores([]);
+      } else {
+        alert("Você deve digitar algo!");
+      }
     }
   }
 
