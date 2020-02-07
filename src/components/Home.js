@@ -1,20 +1,26 @@
-import React, { useEffect, useCallback } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import { useSessionStorage } from "react-use";
 import RepositoriesList from "./RepositoriesList";
 import "../scss/Home.scss";
 
-//const API_URL = 'https://api.github.com/users/diegoasmello/repos';
-const API_URL = "https://api.github.com/search/repositories";
+//const API_URL = 'https://api.github.com';
+const API_URL = "http://localhost:3001";
 
 export default function Home() {
+  const [loading, setLoading] = useState(false);
   const [value, setValue] = useSessionStorage("value", "");
   const [repositories, setRepositores] = useSessionStorage("repositories", []);
 
   const fetchData = useCallback(
     async (value) => {
-      const response = await fetch(API_URL + "?q=" + value);
+      setLoading(true);
+      const response = await fetch(API_URL + "/search/" + value);
       const data = await response.json();
-      setRepositores(data);
+
+      if (data.status) {
+        setRepositores(data.data);
+        setLoading(false);
+      }
     },
     [setRepositores]
   );
@@ -31,15 +37,13 @@ export default function Home() {
     if (evt.key === "Enter") searchRepositores();
   }
 
-  /* useEffect(() => {
-    if (!value) {
+  useEffect(() => {
+    if (value) {
+      fetchData(value);
+    } else {
       setRepositores([]);
     }
-  }, [value]) */
-
-  useEffect(() => {
-    if (value) fetchData(value);
-  }, [fetchData, value]);
+  }, [fetchData, setRepositores, value]);
 
   return (
     <div className="home">
@@ -80,14 +84,20 @@ export default function Home() {
               </div>
 
               <div className="card">
-                {repositories.total_count > 0 ? (
-                  <div className="card-body">
-                    <h2>{repositories.total_count} repository results</h2>
-                    <RepositoriesList repositories={repositories.items} />
-                  </div>
+                {!loading ? (
+                  repositories.total_count > 0 ? (
+                    <div className="card-body">
+                      <h2>{repositories.total_count} repository results</h2>
+                      <RepositoriesList repositories={repositories.items} />
+                    </div>
+                  ) : (
+                    <div className="card-body empty">
+                      <p>No entry found</p>
+                    </div>
+                  )
                 ) : (
-                  <div className="card-body">
-                    <p className="empty">No entry found</p>
+                  <div className="card-body loading">
+                    <div className="loader"></div>
                   </div>
                 )}
               </div>

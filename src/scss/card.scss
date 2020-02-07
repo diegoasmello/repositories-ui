@@ -1,8 +1,10 @@
 .card {
   background: $secondary;
+  border: 0;
   border-radius: 4px;
 
   .card-header {
+    border: 0;
   }
 
   .card-body {
@@ -10,6 +12,12 @@
 
     overflow: hidden;
     overflow-y: auto;
+
+    &.loading {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
 
     &::-webkit-scrollbar {
       width: 8px;

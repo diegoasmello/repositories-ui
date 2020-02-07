@@ -18,3 +18,49 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }
+
+.loader {
+  animation-duration: 1.25s;
+  animation-fill-mode: forwards;
+  animation-iteration-count: infinite;
+  animation-name: placeHolderShimmer;
+  animation-timing-function: linear;
+  background: $secondary !important;
+  background: linear-gradient(
+    to right,
+    $secondary 10%,
+    $terciary 20%,
+    $secondary 90%
+  ) !important;
+  background-size: 800px 104px !important;
+  height: auto;
+  position: relative;
+}
+
+@keyframes placeHolderShimmer {
+  0% {
+    background-position: -468px 0;
+  }
+  100% {
+    background-position: 468px 0;
+  }
+}
+
+.loader {
+  border: 16px solid $terciary !important; /* Light grey */
+  border-top: 16px solid $secondary !important; /* Blue */
+  border-radius: 50% !important;
+  width: 120px !important;
+  height: 120px !important;
+  background: transparent !important;
+  animation: spin 1.25s linear infinite;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}

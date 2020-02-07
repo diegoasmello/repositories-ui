@@ -1,6 +1,4 @@
 import React from "react";
-import { Link } from "react-router-dom";
-
 import "../scss/RepositoriesList.scss";
 
 export default function RepositoriesList({ repositories }) {
@@ -8,8 +6,8 @@ export default function RepositoriesList({ repositories }) {
     <ul className="repositories-list">
       {repositories.map((repo) => (
         <li key={repo.id} className="repository-item">
-          <Link
-            to={"/view/" + repo.owner.login + "/" + repo.name}
+          <a
+            href={"/view/" + repo.owner.login + "/" + repo.name}
             className="repository-link"
           >
             <svg
@@ -63,7 +61,7 @@ export default function RepositoriesList({ repositories }) {
                 <li className="updated">Updated at {repo.updated_at}</li>
               </ul>
             </div>
-          </Link>
+          </a>
         </li>
       ))}
     </ul>
