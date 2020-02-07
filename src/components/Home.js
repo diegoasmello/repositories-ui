@@ -32,7 +32,7 @@ export default function Home() {
       if (repositories.total_count > 0) {
         setRepositores([]);
       } else {
-        alert("Você deve digitar algo!");
+        alert("You must type something!");
       }
     }
   }
