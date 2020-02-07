@@ -22,15 +22,20 @@ export default function RepositoryDetail({ match }) {
   const [repositoriesFromAuthor, setRepositoriesFromAuthor] = useState([]);
 
   const fetchData = useCallback(async () => {
-    const response = await fetch(
-      API_URL + "/repository/" + match.params.owner + "/" + match.params.repo
-    );
-    const data = await response.json();
+    try {
+      const response = await fetch(
+        API_URL + "/repository/" + match.params.owner + "/" + match.params.repo
+      );
+      const data = await response.json();
 
-    if (data.status) {
-      setRepository(data.data.respository);
-      setRepositoriesFromAuthor(data.data.repositoriesFromAuthor);
+      if (data.status) {
+        setRepository(data.data.respository);
+        setRepositoriesFromAuthor(data.data.repositoriesFromAuthor);
+        setLoading(false);
+      }
+    } catch (e) {
       setLoading(false);
+      alert("Error: " + e.message);
     }
   }, [match.params.owner, match.params.repo]);
 

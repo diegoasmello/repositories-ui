@@ -13,12 +13,18 @@ export default function Home() {
   const fetchData = useCallback(
     async (value) => {
       setLoading(true);
-      const response = await fetch(API_URL + "/search/" + value);
-      const data = await response.json();
 
-      if (data.status) {
-        setRepositores(data.data);
+      try {
+        const response = await fetch(API_URL + "/search/" + value);
+        const data = await response.json();
+
+        if (data.status) {
+          setRepositores(data.data);
+          setLoading(false);
+        }
+      } catch (e) {
         setLoading(false);
+        alert("Error: " + e.message);
       }
     },
     [setRepositores]
