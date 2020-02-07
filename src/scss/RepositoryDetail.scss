@@ -1,12 +1,15 @@
+@import "variables";
+@import "card";
+
 .repository-detail {
-  padding-top: 56px;
+  padding-top: 40px;
   padding-bottom: 40px;
 
   .content {
     display: flex;
     flex-direction: column;
-    height: calc(100vh - 96px);
-    max-height: calc(100vh - 96px);
+    height: calc(100vh - 80px);
+    max-height: calc(100vh - 80px);
 
     .card-about {
       margin-bottom: 16px;
@@ -27,25 +30,84 @@
         .description {
           font-size: 16px;
           line-height: 22px;
+
+          margin-bottom: 24px;
         }
 
-        .btn {
+        .info {
+          display: flex;
+          flex-direction: column;
+
+          margin-bottom: 24px;
+
+          .info-row {
+            display: flex;
+
+            margin-bottom: 10px;
+
+            .info-col {
+              display: flex;
+              align-items: center;
+
+              font-size: 14px;
+
+              &:first-child {
+                width: 16%;
+                margin-right: 24px;
+              }
+
+              &:last-child {
+                flex: 1;
+              }
+
+              svg {
+                margin-right: 10px;
+
+                .fill {
+                  fill: $white;
+                }
+              }
+
+              .language-color {
+                width: 14px;
+                height: 14px;
+                border-radius: 50%;
+
+                background-color: #f1e05a;
+
+                margin-right: 10px;
+              }
+            }
+          }
+
+          .btn {
+            margin-right: 16px;
+
+            &:last-child {
+              margin-right: 0;
+            }
+          }
         }
       }
     }
 
     .card-from-author {
       flex: 1;
+      overflow: hidden;
 
       .card-header {
         display: flex;
         align-items: center;
 
         height: 36px;
+        min-height: 36px;
 
         font-size: 14px;
         font-weight: 600;
 
+        background: #4e5256;
+
+        border: 0;
         padding: 0 24px;
       }
 

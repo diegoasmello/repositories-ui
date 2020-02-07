@@ -14,8 +14,26 @@
 
   padding: 0 10px;
 
+  transition: all 150ms ease-in-out;
+
+  &:hover {
+    color: $primary;
+    background: $white;
+  }
+
   &:focus {
     outline: 0;
     box-shadow: none;
+  }
+
+  &.btn-primary {
+    color: $primary;
+    background: $white;
+    font-weight: 700;
+  }
+
+  &.btn-secondary {
+    color: $white;
+    background: transparent;
   }
 }
