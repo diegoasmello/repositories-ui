@@ -144,16 +144,18 @@ export default function RepositoryDetail({ match }) {
                       </div>
 
                       <div className="info-row">
-                        <div className="info-col">
-                          <div
-                            className="language-color"
-                            style={{
-                              background: LanguageColors[repository.language],
-                            }}
-                          ></div>
+                        {repository.language && (
+                          <div className="info-col">
+                            <div
+                              className="language-color"
+                              style={{
+                                background: LanguageColors[repository.language],
+                              }}
+                            ></div>
 
-                          <span>{repository.language}</span>
-                        </div>
+                            <span>{repository.language}</span>
+                          </div>
+                        )}
 
                         <div className="info-col">Created at {createdAt}</div>
                       </div>

@@ -67,14 +67,16 @@ export default function RepositoriesList({ repositories }) {
                   {repo.stargazers_count}
                 </li>
 
-                <li className="language">
-                  <div
-                    className="language-color"
-                    style={{ background: LanguageColors[repo.language] }}
-                  ></div>
+                {repo.language && (
+                  <li className="language">
+                    <div
+                      className="language-color"
+                      style={{ background: LanguageColors[repo.language] }}
+                    ></div>
 
-                  {repo.language}
-                </li>
+                    {repo.language}
+                  </li>
+                )}
 
                 <li className="updated">
                   Updated at {formatDateTime(new Date(repo.updated_at))}
