@@ -3,7 +3,6 @@ import RepositoriesList from "./RepositoriesList";
 import LanguageColors from "./LanguageColors";
 import "../scss/RepositoryDetail.scss";
 
-//const API_URL = 'https://api.github.com';
 const API_URL = "http://localhost:3001";
 
 function formatDate(date) {

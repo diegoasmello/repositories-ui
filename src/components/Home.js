@@ -3,7 +3,6 @@ import { useSessionStorage } from "react-use";
 import RepositoriesList from "./RepositoriesList";
 import "../scss/Home.scss";
 
-//const API_URL = 'https://api.github.com';
 const API_URL = "http://localhost:3001";
 
 export default function Home() {
