@@ -57,7 +57,7 @@ export default function Home() {
                   onChange={(evt) => setValue(evt.target.value)}
                   onKeyDown={(evt) => enter(evt)}
                   type="text"
-                  placeholder="Search to..."
+                  placeholder="Search..."
                 ></input>
 
                 <button className="btn" onClick={searchRepositores}>
@@ -92,7 +92,7 @@ export default function Home() {
                     </div>
                   ) : (
                     <div className="card-body empty">
-                      <p>No entry found</p>
+                      <p>No repositories found</p>
                     </div>
                   )
                 ) : (

@@ -1,5 +1,20 @@
 import React from "react";
+import LanguageColors from "./LanguageColors";
 import "../scss/RepositoriesList.scss";
+
+function formatDateTime(date) {
+  return (
+    date.getDate().toString().padStart(2, "0") +
+    "/" +
+    (date.getMonth() + 1).toString().padStart(2, "0") +
+    "/" +
+    date.getFullYear() +
+    " " +
+    date.getHours().toString().padStart(2, "0") +
+    ":" +
+    date.getMinutes().toString().padStart(2, "0")
+  );
+}
 
 export default function RepositoriesList({ repositories }) {
   return (
@@ -53,12 +68,17 @@ export default function RepositoriesList({ repositories }) {
                 </li>
 
                 <li className="language">
-                  <div className="language-color"></div>
+                  <div
+                    className="language-color"
+                    style={{ background: LanguageColors[repo.language] }}
+                  ></div>
 
                   {repo.language}
                 </li>
 
-                <li className="updated">Updated at {repo.updated_at}</li>
+                <li className="updated">
+                  Updated at {formatDateTime(new Date(repo.updated_at))}
+                </li>
               </ul>
             </div>
           </a>

@@ -1,11 +1,23 @@
 import React, { useState, useEffect, useCallback } from "react";
 import RepositoriesList from "./RepositoriesList";
+import LanguageColors from "./LanguageColors";
 import "../scss/RepositoryDetail.scss";
 
 //const API_URL = 'https://api.github.com';
 const API_URL = "http://localhost:3001";
 
+function formatDate(date) {
+  return (
+    date.getDate().toString().padStart(2, "0") +
+    "/" +
+    (date.getMonth() + 1).toString().padStart(2, "0") +
+    "/" +
+    date.getFullYear()
+  );
+}
+
 export default function RepositoryDetail({ match }) {
+  const [createdAt, setCreatedAt] = useState(null);
   const [loading, setLoading] = useState(true);
   const [repository, setRepository] = useState([]);
   const [repositoriesFromAuthor, setRepositoriesFromAuthor] = useState([]);
@@ -17,7 +29,6 @@ export default function RepositoryDetail({ match }) {
     const data = await response.json();
 
     if (data.status) {
-      console.log(data.data.respository);
       setRepository(data.data.respository);
       setRepositoriesFromAuthor(data.data.repositoriesFromAuthor);
       setLoading(false);
@@ -27,6 +38,10 @@ export default function RepositoryDetail({ match }) {
   useEffect(() => {
     fetchData();
   }, [fetchData]);
+
+  useEffect(() => {
+    setCreatedAt(formatDate(new Date(repository.created_at)));
+  }, [repository]);
 
   return (
     <div className="repository-detail">
@@ -62,7 +77,7 @@ export default function RepositoryDetail({ match }) {
                             ></path>
                           </svg>
 
-                          <span>{repository.issues} issues</span>
+                          <span>{repository.issues || "0"} issues</span>
                         </div>
 
                         <div className="info-col">
@@ -80,7 +95,9 @@ export default function RepositoryDetail({ match }) {
                             ></path>
                           </svg>
 
-                          <span>{repository.pull_requests} Pull requests</span>
+                          <span>
+                            {repository.pull_requests || "0"} Pull requests
+                          </span>
                         </div>
                       </div>
 
@@ -100,7 +117,7 @@ export default function RepositoryDetail({ match }) {
                             ></path>
                           </svg>
 
-                          <span>{repository.commits} commits</span>
+                          <span>{repository.commits || "0"} commits</span>
                         </div>
 
                         <div className="info-col">
@@ -118,20 +135,23 @@ export default function RepositoryDetail({ match }) {
                             ></path>
                           </svg>
 
-                          <span>{repository.branches} branch</span>
+                          <span>{repository.branches || "0"} branch</span>
                         </div>
                       </div>
 
                       <div className="info-row">
                         <div className="info-col">
-                          <div className="language-color"></div>
+                          <div
+                            className="language-color"
+                            style={{
+                              background: LanguageColors[repository.language],
+                            }}
+                          ></div>
 
                           <span>{repository.language}</span>
                         </div>
 
-                        <div className="info-col">
-                          Created at {repository.updated_at}
-                        </div>
+                        <div className="info-col">Created at {createdAt}</div>
                       </div>
 
                       <a
