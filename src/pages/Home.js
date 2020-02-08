@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useCallback } from "react";
 import { useSessionStorage } from "react-use";
-import RepositoriesList from "./RepositoriesList";
+import RepositoriesList from "../components/RepositoriesList";
 import "../scss/Home.scss";
 
 const API_URL = process.env.REACT_APP_API_URL;

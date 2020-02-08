@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useCallback } from "react";
-import RepositoriesList from "./RepositoriesList";
-import LanguageColors from "./LanguageColors";
+import RepositoriesList from "../components/RepositoriesList";
+import LanguageColors from "../utils/languageColors";
 import "../scss/RepositoryDetail.scss";
 
 const API_URL = process.env.REACT_APP_API_URL;

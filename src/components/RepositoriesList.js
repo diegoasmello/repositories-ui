@@ -1,5 +1,5 @@
 import React from "react";
-import LanguageColors from "./LanguageColors";
+import LanguageColors from "../utils/languageColors";
 import "../scss/RepositoriesList.scss";
 
 function formatDateTime(date) {
