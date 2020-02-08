@@ -3,7 +3,7 @@ import RepositoriesList from "./RepositoriesList";
 import LanguageColors from "./LanguageColors";
 import "../scss/RepositoryDetail.scss";
 
-const API_URL = "http://localhost:3001";
+const API_URL = process.env.REACT_APP_API_URL;
 
 function formatDate(date) {
   return (

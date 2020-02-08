@@ -3,7 +3,7 @@ import { useSessionStorage } from "react-use";
 import RepositoriesList from "./RepositoriesList";
 import "../scss/Home.scss";
 
-const API_URL = "http://localhost:3001";
+const API_URL = process.env.REACT_APP_API_URL;
 
 export default function Home() {
   const [loading, setLoading] = useState(false);
