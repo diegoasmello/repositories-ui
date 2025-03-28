@@ -2,9 +2,16 @@
 
 A simple UI for searching repositories in Github API.
 
-The interface prototype can be viewed [here](https://www.figma.com/file/9WA2VUtvGIt54XDy6nuTQc/BRIDGE?node-id=0%3A1).
+### Setup
 
-### Run
+Install dependencies
 
-`npm install`<br />
+`npm install`
+
+Copy env files and set environment variables
+
+`cp .env.example .env`
+
+Start the dev server
+
 `npm start`
